@@ -1,1 +1,1 @@
-# Odin
+This is a repository for big exercises from The Odin Project.
