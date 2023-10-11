@@ -1,5 +1,5 @@
 class Board
-  attr_reader :new_row, :pegs
+  attr_reader :pegs
 
   def initialize
     @pegs = ["red", "green", "blue", "yellow", "white", "black"]
@@ -12,9 +12,23 @@ end
 
 class Game
   def initialize
-    @board = Board.new
+    @board = choose_role
     @code = @board.create_code
     @new_row = []
+  end
+
+  def choose_role
+    puts "What would you like to do, chose the code or guess the code?"
+    puts "Please chose between: 'chose the code' and 'guess the code'."
+    player = gets.chomp
+    if player == "guess the code"
+      Board.new
+    elsif player == "chose the code"
+      Player.new
+    else
+      puts "Invalid choice"
+      choose_role
+    end
   end
 
   def guess_color
@@ -63,6 +77,15 @@ class Game
     p @code
     get_row
     check_guess
+  end
+end
+
+class Player < Board
+
+  def create_code
+    puts "Enter code bellow:"
+    @code = gets.chomp
+    @code = @code.split(" ")
   end
 end
 
